@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Meloduo — make music with an agent in your own project</title>
+<title>Meloduo: make music with an agent in your own project</title>
 <meta name="description" content="Meloduo is a studio in your browser. Connect the AI agent you already use: it writes notes, designs sounds and mixes in your project while you watch, and one click undoes its whole turn.">
-<meta property="og:title" content="Meloduo — make music with an agent in your own project">
+<meta property="og:title" content="Meloduo: make music with an agent in your own project">
 <meta property="og:description" content="A browser studio where an AI agent works in your project, explains every edit, and undoes its whole turn in one click.">
 <meta property="og:image" content="https://meloduo.github.io/og.png">
 <meta property="og:url" content="https://meloduo.github.io/">
@@ -184,13 +184,42 @@ pre code { background: none; padding: 0; }
 .who-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 56px; margin-top: 32px; }
 .who-grid p { color: var(--dim); margin: 0; }
 
-/* Roadmap */
-.road { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 36px; border-top: 2px solid var(--line); }
-.road > div { padding: 22px 24px 0 0; position: relative; }
-.road > div::before { content: ''; position: absolute; top: -8px; left: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--c); }
-.road h3 { color: var(--c); }
-.road ul { margin: 0; padding-left: 18px; color: var(--soft); }
-.road li { margin: 4px 0; }
+
+
+/* Roadmap v2 */
+.road2 { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: relative; }
+.road2::before { content: ''; position: absolute; top: 7px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--green) 0 10%, var(--line) 10%); }
+.road2 > li { position: relative; padding: 32px 22px 0 0; }
+.road2 > li::before { content: ''; position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--c); }
+.road2 > li.here::before { background: var(--c); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent); }
+.road2 .when { color: var(--c); font-size: 14px; font-weight: 600; margin: 0 0 2px; }
+.road2 h3 { margin-bottom: 10px; }
+.road2 ul { margin: 0; padding: 0; list-style: none; color: var(--soft); font-size: 15px; line-height: 1.5; }
+.road2 ul li { margin: 0 0 8px; padding-left: 14px; position: relative; }
+.road2 ul li::before { content: ''; position: absolute; left: 0; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: var(--c); opacity: .7; }
+.road2 .tag { display: inline-block; margin-top: 6px; font-size: 13px; color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); border-radius: 999px; padding: 1px 9px; }
+.plans { display: grid; grid-template-columns: 1.15fr 1fr 1fr; margin-top: 64px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.plans > div { padding: 26px 26px 24px; }
+.plans > div + div { border-left: 1px solid var(--line); }
+.plans .free { background: radial-gradient(120% 120% at 0% 0%, #1ed48a14, transparent 60%), var(--panel); }
+.plans .name { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 2px; }
+.plans .how { color: var(--c); font-size: 14px; font-weight: 600; margin: 0 0 14px; }
+.plans ul { margin: 0; padding-left: 18px; color: var(--soft); font-size: 15px; }
+.plans li { margin: 0 0 6px; }
+.plans .note { color: var(--dim); font-size: 14px; margin: 14px 0 0; }
+.plans > div { display: flex; flex-direction: column; align-items: flex-start; }
+.plans .btn { margin-top: auto; }
+.plans ul { margin-bottom: 18px; }
+.promise { margin: 18px 0 0; color: var(--dim); font-size: 15px; }
+.promise b { color: var(--text); font-weight: 600; }
+@media (max-width: 920px) {
+  .road2 { grid-template-columns: 1fr; padding-left: 30px; }
+  .road2::before { top: 0; bottom: 0; left: 7px; right: auto; width: 2px; height: auto; background: linear-gradient(180deg, var(--green) 0 7%, var(--line) 7%); }
+  .road2 > li { padding: 0 0 28px; }
+  .road2 > li::before { left: -30px; }
+  .plans { grid-template-columns: 1fr; }
+  .plans > div + div { border-left: 0; border-top: 1px solid var(--line); }
+}
 
 /* Feedback */
 .talk { border-radius: 20px; padding: 40px; background: radial-gradient(120% 140% at 100% 0%, #ff48b01c, transparent 55%), radial-gradient(120% 140% at 0% 100%, #3d9bff1c, transparent 55%), var(--panel); border: 1px solid var(--line); }
@@ -363,15 +392,14 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
   .roll-body, .ears, .setup { grid-template-columns: 1fr; }
   .feed { border-left: 0; border-top: 1px solid var(--line); }
   .feed ol { min-height: 0; }
-  ol.steps, .shelf, .lists, .talk-grid, .road { grid-template-columns: 1fr 1fr; }
-  .road { border-top: 0; gap: 24px; } .road > div { border-top: 2px solid var(--line); }
+  ol.steps, .shelf, .lists, .talk-grid { grid-template-columns: 1fr 1fr; }
   nav.links a.hide-sm { display: none; }
 }
 @media (max-width: 600px) {
   .wrap { padding-inline: 16px; }
   body { font-size: 16px; }
   .lede { font-size: 18px; }
-  ol.steps, .shelf, .lists, .talk-grid, .road, .who-grid, .limits { grid-template-columns: 1fr; }
+  ol.steps, .shelf, .lists, .talk-grid, .who-grid, .limits { grid-template-columns: 1fr; }
   .legend, .lcd { display: none; }
   .talk { padding: 24px; }
   section { padding-top: 80px; }
@@ -407,7 +435,7 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
     <div class="actions">
       <a class="btn primary" href="app/">Open the app</a>
       <a class="btn quiet" href="#setup">Connect an agent</a>
-      <span class="note-free">Free during the preview. No account.</span>
+      <span class="note-free">Free. No account.</span>
     </div>
 
     <figure class="roll studio" id="roll" aria-label="One track, five stages of the agent's work. Press Play to hear it.">
@@ -511,14 +539,14 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
 
 
   <section class="wrap" id="inside">
-    <h2>A full studio, not a black box</h2>
-    <p class="prose dim">The agent uses the same studio you do. What it makes is a real project: notes you can move, sounds you can tweak, a mix you can rebalance. The studio keeps growing.</p>
+    <h2>What is in the studio</h2>
+    <p class="prose dim">The agent uses the same studio you do. What it makes is a real project: notes you can move, sounds you can tweak, a mix you can rebalance.</p>
     <div class="shelf">
       <div class="inst" style="--c: var(--you)"><h3><span class="chip"></span>Meloduo Synth</h3><p>Oscillators, wavetables, filters, modulation, an arpeggiator and presets.</p></div>
       <div class="inst" style="--c: var(--teal)"><h3><span class="chip"></span>Drums</h3><p>Acoustic and electronic engines with ready kits and a step sequencer.</p></div>
       <div class="inst" style="--c: var(--green)"><h3><span class="chip"></span>Guitar</h3><p>A guitar voice with strums and its own amp.</p></div>
       <div class="inst" style="--c: var(--violet)"><h3><span class="chip"></span>808</h3><p>A melodic 808 with glide, drive and presence.</p></div>
-      <div class="inst" style="--c: #7cc4ff"><h3><span class="chip"></span>Sampler</h3><p>Your own audio: import, audio clips, sound folders, drag and drop.</p></div>
+      <div class="inst" style="--c: #7cc4ff"><h3><span class="chip"></span>Sampler</h3><p>Your own audio: import files, link sound folders, drag sounds into the Playlist.</p></div>
       <div class="inst soon" style="--c: var(--dim)"><h3>More on the way</h3><p>New instruments and effects, deeper versions of these, and VST plugins through a desktop app.</p></div>
     </div>
     <div class="lists">
@@ -550,14 +578,14 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
   <section class="wrap" id="agents">
     <div class="ears">
       <div>
-        <h2>Built for agents. An agent cannot hear, so it reads.</h2>
+        <h2>The agent cannot hear, so it reads the render</h2>
         <p class="prose dim">The agent works through more than 60 tools: notes, channels, synths, drums, mixer, effects, automation, rendering. Before it decides, it renders the track and reads loudness, peaks, the spectrum and plain warnings that name the next step.</p>
         <button class="btn quiet" type="button" id="to-master">See it in the Master stage</button>
       </div>
       <ul class="facts">
-        <li><b>Undo per turn</b><span>Everything the agent did in one turn goes back with one click. Your own edits stay.</span></li>
+        <li><b>Undo per turn</b><span>Everything the agent did in one turn goes back with one click while that turn is the latest change.</span></li>
         <li><b>Your edits come first</b><span>If you changed the project while it was thinking, its stale edit is rejected and it sees what you did.</span></li>
-        <li><b>All or nothing</b><span>Each call applies fully or not at all. No half-made changes.</span></li>
+        <li><b>All or nothing</b><span>Each call applies fully or not at all.</span></li>
         <li><b>Every edit says why</b><span>One line in your language next to each change.</span></li>
         <li><b>Producer skills</b><span>One takes a track from an idea to a master in ten stages with checks. One designs sounds by trying variants.</span></li>
       </ul>
@@ -582,7 +610,7 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
     <div class="privacy">
       <div><h3>Stays on your computer</h3><ul><li>Your projects, in this browser's storage</li><li>Your samples and exports</li><li>The audio: rendering and analysis run locally</li></ul></div>
       <div><h3>Goes to your AI provider</h3><ul><li>The project state the agent reads: notes, channels, settings</li><li>Render reports: numbers, not audio</li><li>Your messages to the agent</li></ul></div>
-      <div><h3>What the agent cannot do</h3><ul><li>Read your files or your project library</li><li>Load plugins from the web</li><li>Make a change you cannot undo while the tab is open</li></ul></div>
+      <div><h3>What the agent cannot do through Meloduo</h3><ul><li>Open other projects in your library or import files</li><li>Add web plugins: it only turns the knobs of the ones you added</li><li>Make a change you cannot undo while the tab is open</li></ul></div>
     </div>
     <p class="dim prose" style="margin-top:20px">GitHub hosts this site and, like any web host, sees your IP address. A web plugin you add yourself loads its code from the site you got it from.</p>
   </section>
@@ -637,32 +665,61 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
 
   <section class="wrap" id="roadmap">
     <h2>Where it is going</h2>
-    <p class="prose dim">The preview is the start. Your feedback decides the order of what comes next.</p>
-    <div class="road">
-      <div style="--c: var(--green)"><h3>Now</h3><ul>
-        <li>The studio above</li>
-        <li>The agent bridge and two producer skills</li>
+    <p class="prose dim">The studio stays free and runs in your browser. What comes next is the part a static page cannot do: your projects in the cloud, a history of every agent turn, and an agent that works with no setup. Your feedback decides the order.</p>
+    <ol class="road2">
+      <li class="here" style="--c: var(--green)"><p class="when">Now</p><h3>Public preview</h3><ul>
+        <li>The studio above, free</li>
+        <li>Your own agent through the bridge, with two producer skills</li>
         <li>Export to WAV, MP3, stems and MIDI</li>
-      </ul></div>
-      <div style="--c: var(--you)"><h3>Next</h3><ul>
+      </ul></li>
+      <li style="--c: var(--you)"><p class="when">Next</p><h3>Easier start</h3><ul>
+        <li>Paste your own API key and use the agent in the tab, without a terminal</li>
         <li>A demo project and first-run hints</li>
-        <li>Chorus</li>
+        <li>Chorus, count-in, recording in song mode</li>
         <li>Tempo and key changes inside a song</li>
-        <li>Count-in and recording in song mode</li>
-      </ul></div>
-      <div style="--c: var(--violet)"><h3>Later</h3><ul>
-        <li>More instruments and effects</li>
+      </ul></li>
+      <li style="--c: var(--violet)"><p class="when">Then</p><h3>Project history</h3><ul>
+        <li>A timeline of agent turns: what changed, in notes and decibels</li>
+        <li>Listen to two versions back to back</li>
+        <li>Restore any turn as a copy</li>
+      </ul><span class="tag">Free on this device</span></li>
+      <li style="--c: var(--teal)"><p class="when">Then</p><h3>Meloduo Cloud</h3><ul>
+        <li>Your projects and their history on every device</li>
+        <li>Share a project by link</li>
+        <li>Built-in models: pick one and start, pay for what you use</li>
+      </ul><span class="tag">Subscription and credits</span></li>
+      <li style="--c: var(--agent)"><p class="when">Later</p><h3>Together</h3><ul>
+        <li>Work in one project with a friend, live</li>
+        <li>Lessons for teachers: the agent tutors, the teacher reviews</li>
         <li>VST plugins through a desktop app</li>
-        <li>A skill for each production stage</li>
-        <li>A teacher mode that explains each step</li>
-      </ul></div>
+      </ul></li>
+    </ol>
+
+    <div class="plans">
+      <div class="free" style="--c: var(--green)"><p class="name">Free</p><p class="how">Always</p><ul>
+        <li>The whole studio and every instrument</li>
+        <li>Projects saved in your browser</li>
+        <li>Export of audio, stems and MIDI</li>
+        <li>Your own agent through any MCP client</li>
+      </ul><a class="btn primary small" href="app/">Open the app</a></div>
+      <div style="--c: var(--teal)"><p class="name">Cloud</p><p class="how">Subscription, planned</p><ul>
+        <li>Sync and backup across devices</li>
+        <li>Full project history in the cloud</li>
+        <li>Share by link; live co-editing later</li>
+      </ul><p class="note">Price at launch.</p><a class="btn quiet small" data-link="idea" href="#">Ask for it</a></div>
+      <div style="--c: var(--agent)"><p class="name">Built-in models</p><p class="how">Credits, planned</p><ul>
+        <li>Choose a model in the app; you need no key and no setup</li>
+        <li>Models from the major AI labs; we train none of our own</li>
+        <li>The price follows the model's own cost</li>
+      </ul><p class="note">A monthly cap, so there are no surprise bills.</p><a class="btn quiet small" data-link="idea" href="#">Ask for it</a></div>
     </div>
+    <p class="promise"><b>Everything you can do today stays free.</b> Paid plans pay for the server they need.</p>
   </section>
 
   <section class="wrap" id="talk">
     <div class="talk">
       <h2>Tell us what to build</h2>
-      <p class="prose dim">This is a preview built in the open. Every report and idea gets read, and the best ones jump the roadmap.</p>
+      <p class="prose dim">This is a preview built in the open. We read every report and idea, and they change the order of the roadmap.</p>
       <div class="talk-grid">
         <a class="card" data-link="bug" href="#"><h3>Report a bug</h3><span>Something broke, sounded wrong or confused you.</span></a>
         <a class="card" data-link="idea" href="#"><h3>Suggest a feature</h3><span>An instrument, an effect, a workflow for the agent.</span></a>
@@ -684,9 +741,9 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
       <li><b>No VST plugins yet.</b> Browsers cannot run them. Web plugins in the WAM 2.0 format work.</li>
     </ul>
     <div style="margin-top:44px">
-      <details><summary>Is it free?</summary><p>Yes, during the preview. You pay only for your own AI agent, if it is a paid one.</p></details>
-      <details><summary>Does the agent make the whole song for me?</summary><p>It can take a track from an idea to a master, but it works step by step in your project, and you can stop it, edit, or undo any turn. It is not a one-click song generator.</p></details>
-      <details><summary>Which agents work?</summary><p>Any client that speaks MCP. We test with Claude Code. The skills are plain SKILL.md folders, so other clients that read skills can use them too.</p></details>
+      <details><summary>Is it free?</summary><p>Yes, and the studio stays free. You pay only for your own AI agent, if it is a paid one. Paid plans are planned for things that need a server: cloud sync and built-in models.</p></details>
+      <details><summary>Does the agent make the whole song for me?</summary><p>It can take a track from an idea to a master, but it works step by step in your project. You can stop it, edit its work, or undo its latest turn.</p></details>
+      <details><summary>Which agents work?</summary><p>Any client that speaks MCP. We test with Claude Code and Cline. The skills are plain SKILL.md folders, so other clients that read skills can use them too.</p></details>
       <details><summary>Where are my projects?</summary><p>In your browser's storage on this computer. There is no cloud copy, so save project files for anything you care about.</p></details>
       <details><summary>Which browsers work?</summary><p>Desktop Chrome and Edge are tested. Firefox and Safari may work but are not tested yet. Phones are not supported.</p></details>
       <details><summary>Does Meloduo send my music anywhere?</summary><p>No. Meloduo has no server. Only your own agent sees the project state and render numbers, and sends them to the AI provider you chose. Audio never leaves your computer.</p></details>
@@ -695,7 +752,7 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
   </section>
 
   <section class="wrap closing">
-    <h2>Your project. Your hands. Plus one more pair.</h2>
+    <h2>Open the studio and ask your agent for a track</h2>
     <div class="actions">
       <a class="btn primary" href="app/">Open the app</a>
       <a class="btn quiet" href="#setup">Connect an agent</a>
