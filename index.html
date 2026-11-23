@@ -69,10 +69,11 @@ h1 { font-size: clamp(42px, 7vw, 88px); line-height: 0.98; letter-spacing: -0.04
 .roll { position: relative; margin: 56px 0 0; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: 0 40px 80px -40px #000, 0 0 0 1px #ffffff06 inset; }
 .roll::before { content: ''; position: absolute; inset: -40% -10% auto; height: 80%; background: radial-gradient(closest-side, #ff48b014, transparent), radial-gradient(closest-side at 30% 60%, #3d9bff12, transparent); pointer-events: none; }
 .roll-bar { position: relative; display: flex; align-items: center; gap: 14px; padding: 10px 14px; background: var(--panel-2); border-bottom: 1px solid var(--line); font-size: 14px; color: var(--dim); }
-.play { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #052016; border: 0; border-radius: 8px; padding: 7px 12px; font: 650 14px/1 'Geist', system-ui, sans-serif; cursor: pointer; }
+.play { display: inline-flex; align-items: center; justify-content: center; min-width: 84px; gap: 8px; background: var(--green); color: #052016; border: 0; border-radius: 8px; padding: 7px 12px; font: 650 14px/1 'Geist', system-ui, sans-serif; cursor: pointer; }
 .play svg { width: 12px; height: 12px; }
 .play.on { background: var(--panel); color: var(--text); box-shadow: 0 0 0 1px var(--line) inset; }
 .lcd { background: #10131a; border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; color: var(--text); font-variant-numeric: tabular-nums; }
+#pos { min-width: 5ch; text-align: center; }
 .chan { color: var(--text); font-weight: 600; }
 .chan i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: var(--c); margin-right: 7px; vertical-align: -1px; }
 .legend { margin-left: auto; display: flex; gap: 16px; }
@@ -427,7 +428,7 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
         <button class="play" id="play" type="button" aria-pressed="false" aria-keyshortcuts="Space" title="Play or stop (Space)"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg><span>Play</span></button>
         <span class="lcd" id="bpm">84 BPM</span>
         <span class="lcd" id="pos">1:1</span>
-        <div class="vol" id="vol" role="slider" tabindex="0" aria-label="Demo volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" title="Drag, scroll or use the arrow keys. Double-click resets."><svg viewBox="0 0 30 30" aria-hidden="true"><path class="vtrack" fill="none" stroke="#2b303c" stroke-width="3.5" stroke-linecap="round"/><path class="varc" fill="none" stroke="#e8eaf0" stroke-width="3.5" stroke-linecap="round"/><circle cx="15" cy="15" r="7.5" fill="#262b37"/><line class="vptr" x1="15" y1="15" stroke="#e8eaf0" stroke-width="2" stroke-linecap="round"/></svg><span>Vol <b id="vol-v">50%</b></span></div>
+        <div class="vol" id="vol" role="slider" tabindex="0" aria-label="Demo volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" title="Drag or use the arrow keys. Double-click resets."><svg viewBox="0 0 30 30" aria-hidden="true"><path class="vtrack" fill="none" stroke="#2b303c" stroke-width="3.5" stroke-linecap="round"/><path class="varc" fill="none" stroke="#e8eaf0" stroke-width="3.5" stroke-linecap="round"/><circle cx="15" cy="15" r="7.5" fill="#262b37"/><line class="vptr" x1="15" y1="15" stroke="#e8eaf0" stroke-width="2" stroke-linecap="round"/></svg><span>Vol <b id="vol-v">50%</b></span></div>
         <span class="chan" id="where"></span>
         <span class="legend" id="legend"></span>
       </div>
@@ -1159,7 +1160,6 @@ const LINKS = {
     volEl.addEventListener('pointermove', move);
     volEl.addEventListener('pointerup', () => volEl.removeEventListener('pointermove', move), { once: true });
   });
-  volEl.addEventListener('wheel', (e) => { e.preventDefault(); setVol(VOL - Math.sign(e.deltaY) * 0.05); }, { passive: false });
   volEl.addEventListener('keydown', (e) => { const d = { ArrowUp: 0.05, ArrowRight: 0.05, ArrowDown: -0.05, ArrowLeft: -0.05 }[e.key]; if (d) { e.preventDefault(); setVol(VOL + d); } });
   volEl.addEventListener('dblclick', () => setVol(0.5));
   const syncAudio = () => { if (playing) rig.apply(ctx.currentTime); };
