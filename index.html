@@ -217,7 +217,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 footer a { color: var(--dim); }
 
 /* Why: a real comparison, so a table */
-.compare { width: 100%; max-width: 880px; margin-top: 32px; border-collapse: collapse; font-size: 15px; }
+.compare-scroll { overflow-x: auto; }
+.compare { width: 100%; max-width: 1040px; min-width: 640px; margin-top: 32px; border-collapse: collapse; font-size: 15px; }
 .compare th, .compare td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); }
 .compare thead th { color: var(--dim); font-weight: 600; font-size: 14px; }
 .compare tbody th { font-weight: 500; color: var(--soft); }
@@ -492,17 +493,19 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
 
   <section class="wrap" id="why">
     <h2>A generator gives you a file. Meloduo gives you a project.</h2>
-    <p class="prose dim">Song generators are fast, but you cannot open the result: to fix the bass you regenerate everything. A DAW gives you full control, and weeks of learning before the first track. Meloduo puts an agent inside the DAW.</p>
-    <table class="compare">
-      <thead><tr><th scope="col"></th><th scope="col">A song generator</th><th scope="col">A DAW on your own</th><th scope="col" class="us">Meloduo</th></tr></thead>
+    <p class="prose dim">Song generators are fast, but the result is hard to change: to fix the bass you often regenerate the song. A DAW gives you full control, and weeks of learning before the first track. AI features inside big DAWs help with parts. Meloduo lets the agent you already use work on the whole project, next to you.</p>
+    <div class="compare-scroll"><table class="compare">
+      <thead><tr><th scope="col"></th><th scope="col">A song generator</th><th scope="col">A DAW on your own</th><th scope="col">AI features in a DAW</th><th scope="col" class="us">Meloduo</th></tr></thead>
       <tbody>
-        <tr><th scope="row">A full track in an evening</th><td class="yes">Yes</td><td>Rarely</td><td class="us yes">Yes</td></tr>
-        <tr><th scope="row">Notes, sounds and mix you can edit</th><td>No</td><td class="yes">Yes</td><td class="us yes">Yes</td></tr>
-        <tr><th scope="row">Every change explained</th><td>No</td><td>—</td><td class="us yes">Yes</td></tr>
-        <tr><th scope="row">Undo what you don't like</th><td>Regenerate</td><td class="yes">Yes</td><td class="us yes">One turn at a time</td></tr>
-        <tr><th scope="row">You stay the author</th><td>No</td><td class="yes">Yes</td><td class="us yes">Yes</td></tr>
+        <tr><th scope="row">A first draft in minutes</th><td class="yes">Yes</td><td>No</td><td>For parts</td><td class="us yes">Yes</td></tr>
+        <tr><th scope="row">Notes, sounds and mix you can edit</th><td>Stems at best</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="us yes">Yes</td></tr>
+        <tr><th scope="row">Every change explained</th><td>No</td><td>—</td><td>Sometimes</td><td class="us yes">Yes</td></tr>
+        <tr><th scope="row">Undo what you don't like</th><td>Regenerate</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="us yes">One turn at a time</td></tr>
+        <tr><th scope="row">Works with the AI you already use</th><td>No</td><td>—</td><td>Built-in only</td><td class="us yes">Any MCP client</td></tr>
+        <tr><th scope="row">Pro instruments and third-party plugins</th><td>—</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="us">Built-in and web plugins; VST later</td></tr>
+        <tr><th scope="row">You stay in control</th><td>Partly</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="us yes">Yes</td></tr>
       </tbody>
-    </table>
+    </table></div>
   </section>
 
 
@@ -624,7 +627,7 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
   <section class="wrap" id="who">
     <h2>Who it is for</h2>
     <div class="who-grid">
-      <div><h3>You use AI tools and want to stay the author</h3><p>You bring the idea and the taste. The agent does the hours of clicking, and every decision stays yours.</p></div>
+      <div><h3>You use AI tools and want to stay in charge</h3><p>You bring the idea and the taste. The agent does the hours of clicking, and every decision stays yours.</p></div>
       <div><h3>You are learning to produce</h3><p>Every track comes apart: what sits on the buses, why that compressor, how the drop is built. Each edit says why.</p></div>
       <div><h3>You produce and want help with routine</h3><p>Lay out patterns, balance levels, bounce stems, bring the master to a streaming level.</p></div>
       <div><h3>You build with MCP</h3><p>A real app with transactional tools, conflict handling and an undo for each turn. The bridge and the skills are open.</p></div>
