@@ -315,7 +315,7 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
 .strip.sel { background: #20242f; box-shadow: 0 0 0 1px #ffffff1a inset; }
 .strip header { font-weight: 600; color: var(--text); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .strip .pan { width: 24px; height: 24px; align-self: center; }
-.strip .fader { position: relative; display: grid; grid-template-columns: 1fr 26px 8px; gap: 4px; height: 190px; margin: 4px 0; }
+.strip .fader { position: relative; display: grid; grid-template-columns: 22px 26px 8px; justify-content: center; gap: 4px; height: 190px; margin: 4px 0; padding-right: 14px; }
 .strip .scale { position: relative; color: #6b7285; font-size: 9px; font-variant-numeric: tabular-nums; }
 .strip .scale span { position: absolute; right: 2px; transform: translateY(-50%); line-height: 1; }
 .strip .track { position: relative; }
@@ -615,7 +615,7 @@ command = "npx"
 args = ["-y", "@meloduo/mcp"]</code></pre></div>
           <div class="code" data-client="other" hidden><div class="code-bar"><span>Any client: a stdio server</span><button class="copy" type="button">Copy</button></div><pre><code>{ "command": "npx", "args": ["-y", "@meloduo/mcp"] }</code></pre></div>
         </li>
-        <li><h3>Add the skills</h3><p class="dim">Two folders: one takes a track from an idea to a master in ten stages, one designs sounds by trying variants. Put them in your client's skills folder. A client without skills can read <code>SKILL.md</code> as instructions.</p><p><a class="btn quiet small" data-link="skills" href="#">Download the skills</a></p></li>
+        <li><h3>Add the skills</h3><p class="dim">Two folders: one takes a track from an idea to a master in ten stages, one designs sounds by trying variants. Put them in your client's skills folder. A client without skills can read <code>SKILL.md</code> as instructions.</p><p><a class="btn quiet small" data-link="skills" href="#">Get the skills on GitHub</a></p></li>
         <li><h3>Open the app and ask</h3><p class="dim"><a href="app/">Open Meloduo</a>, click once so the browser allows sound, and allow access to local devices if the browser asks. Then ask your agent for a track.</p></li>
       </ol>
     </div>
@@ -716,7 +716,7 @@ const LINKS = {
   bug: 'https://github.com/meloduo/meloduo-agent/issues/new',
   idea: 'https://github.com/meloduo/meloduo-agent/discussions',
   survey: '',
-  skills: 'https://github.com/meloduo/meloduo-agent/releases/latest',
+  skills: 'https://github.com/meloduo/meloduo-agent/tree/main/skills',
   updates: '',
   contact: 'mailto:meloduo.demo@gmail.com',
 };
