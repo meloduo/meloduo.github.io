@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page not found — Meloduo</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/geist.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face { font-family: 'Geist'; src: url(/geist.woff2) format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'Geist'; src: url(/geist.woff2) format('woff2'); font-weight: 100 900; font-display: optional; }
 :root { --bg: #0f1117; --line: #2b303c; --text: #e8eaf0; --dim: #8d94a6; --you: #3d9bff; }
 * { box-sizing: border-box; }
 body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--text); font: 17px/1.6 'Geist', system-ui, sans-serif; padding: 24px; }
