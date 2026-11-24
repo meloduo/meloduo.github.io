@@ -23,7 +23,7 @@
   --yellow: #ffd400; --orange: #ff7a3d; --green: #1ed48a; --violet: #9b7bff; --teal: #19c3c9;
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; color-scheme: dark; scrollbar-color: var(--line) transparent; }
 body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 'Geist', system-ui, sans-serif; overflow-x: hidden; }
 a { color: var(--you); text-underline-offset: 3px; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--you); outline-offset: 3px; border-radius: 6px; }
@@ -393,8 +393,8 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
 
 /* Mixer modelled on the app: tall strips, Inserts of the selected strip on the right */
 .mixer { display: grid; grid-template-columns: minmax(0, 1fr) 236px; min-height: 100%; }
-.strips { display: flex; gap: 4px; padding: 12px; overflow-x: auto; }
-.strip { flex: 1 0 70px; max-width: 112px; display: flex; flex-direction: column; align-items: stretch; gap: 10px; padding: 10px 8px 10px; border-radius: 8px; background: #1a1d26; border: 1px solid var(--line); border-top: 2px solid var(--c); font-size: 11px; }
+.strips { display: flex; gap: 4px; padding: 12px; overflow: hidden; }
+.strip { flex: 1 1 0; min-width: 0; max-width: 112px; container-type: inline-size; display: flex; flex-direction: column; align-items: stretch; gap: 10px; padding: 10px 8px 10px; border-radius: 8px; background: #1a1d26; border: 1px solid var(--line); border-top: 2px solid var(--c); font-size: 11px; }
 .strip.sel { background: #20242f; box-shadow: 0 0 0 1px #ffffff1a inset; }
 .strip header { font-weight: 600; color: var(--text); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .strip .pan { width: 24px; height: 24px; align-self: center; }
@@ -414,6 +414,18 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
 .strip.touched .db { color: var(--agent); border-color: #ff48b066; }
 .strip .ms { display: flex; gap: 4px; justify-content: center; }
 .strip .ms span { width: 22px; height: 18px; display: grid; place-items: center; border-radius: 4px; background: #262b37; color: var(--dim); font-size: 10px; font-weight: 600; }
+/* Strips shrink to fit instead of scrolling: narrow strips drop the scale, then the pan and send */
+@container (max-width: 77px) { .strip .fader { padding-right: 0; } }
+@container (max-width: 63px) { .strip .scale { display: none; } .strip .fader { grid-template-columns: 26px 8px; } }
+@container (max-width: 44px) {
+  .strip .pan, .strip .sendv { display: none; }
+  .strip .fader { grid-template-columns: minmax(0, 1fr) 6px; gap: 2px; }
+  .strip header { font-size: 10px; }
+  .strip .db { min-width: 0; padding: 2px 0; font-size: 9px; }
+  .strip .ms { gap: 2px; }
+  .strip .ms span { width: auto; flex: 1; }
+}
+@media (max-width: 600px) { .strips { padding: 8px; gap: 3px; } .strip { padding: 8px 3px; } }
 .inserts { border-left: 1px solid var(--line); background: #151821; padding: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; min-width: 0; }
 .ins-head { display: flex; justify-content: space-between; }
 .ins-head span { color: var(--soft); }
