@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Meloduo: make music with an agent in your own project</title>
-<meta name="description" content="Meloduo is a studio in your browser. Connect the AI agent you already use: it writes notes, designs sounds and mixes in your project while you watch, and one click undoes its whole turn.">
-<meta property="og:title" content="Meloduo: make music with an agent in your own project">
+<title>Meloduo: a free browser studio your AI agent edits live</title>
+<meta name="description" content="Meloduo is a free music studio in your browser. Connect the AI agent you already use: it writes notes, designs sounds and mixes in your project while you watch, and one click undoes its whole turn.">
+<meta property="og:title" content="Meloduo: a free browser studio your AI agent edits live">
 <meta property="og:description" content="A browser studio where an AI agent works in your project, explains every edit, and undoes its whole turn in one click.">
 <meta property="og:image" content="https://meloduo.github.io/og.png">
 <meta property="og:url" content="https://meloduo.github.io/">
@@ -526,8 +526,8 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
 
 <main>
   <div class="wrap hero">
-    <h1>Make music with an agent in your own project.</h1>
-    <p class="lede">Meloduo is a studio in your browser. Connect the AI agent you already use: it writes notes, shapes sounds and mixes in the project open in your tab. You see every edit and the reason for it. One click undoes its whole turn.</p>
+    <h1>A free browser studio your AI agent edits live.</h1>
+    <p class="lede">Meloduo is a free music studio in your browser: no account, no DAW to buy. Connect the AI agent you already use: it writes notes, shapes sounds and mixes in the project open in your tab. You see every edit and the reason for it. One click undoes its whole turn.</p>
     <div class="actions">
       <a class="btn primary" href="app/">Open the app</a>
       <a class="btn quiet" href="#setup">Connect an agent</a>
@@ -613,7 +613,7 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
       <figcaption class="roll-hint"><span id="hint"></span><span class="keys">A scripted demo · <kbd>Space</kbd> play and stop</span></figcaption>
     </figure>
 
-    <div class="works"><span>Works with any MCP client:</span><b>Claude Code</b><b>Cursor</b><b>VS Code</b><b>Codex</b><span>and others</span></div>
+    <div class="works"><span>Tested with</span><b>Claude Code</b><b>Cline</b><span>· setup below for</span><b>Cursor</b><b>VS Code</b><b>Codex</b></div>
   </div>
 
   <section class="wrap" id="why">
@@ -891,6 +891,7 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
       <details><summary>Is it free?</summary><p>Yes, and the studio stays free. You pay only for your own AI agent, if it is a paid one. Paid plans are planned for things that need a server: cloud sync and built-in models.</p></details>
       <details><summary>Does the agent make the whole song for me?</summary><p>It can take a track from an idea to a master, but it works step by step in your project. You can stop it, edit its work, or undo its latest turn.</p></details>
       <details><summary>Which agents work?</summary><p>Any client that speaks MCP. We test with Claude Code and Cline. The skills are plain SKILL.md folders, so other clients that read skills can use them too.</p></details>
+      <details><summary>How is this different from MCP bridges for desktop DAWs?</summary><p>There is no DAW to buy or install: the studio runs in your browser. The agent edits the project open in your tab, so you see each change as it lands, with its reason, and one click undoes its whole turn. It cannot hear, so it renders the track and reads loudness, peaks and the spectrum before it decides.</p></details>
       <details><summary>Where are my projects?</summary><p>In your browser's storage on this computer. There is no cloud copy, so save project files for anything you care about.</p></details>
       <details><summary>Which browsers work?</summary><p>Desktop Chrome and Edge are tested. Firefox and Safari may work but are not tested yet. Phones are not supported.</p></details>
       <details><summary>Does Meloduo send my music anywhere?</summary><p>No. Meloduo has no server. Only your own agent sees the project state and render numbers, and sends them to the AI provider you chose. Audio never leaves your computer.</p></details>
