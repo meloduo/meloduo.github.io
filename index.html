@@ -186,18 +186,41 @@ pre code { background: none; padding: 0; }
 
 
 
-/* Roadmap v2 */
-.road2 { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: relative; }
-.road2::before { content: ''; position: absolute; top: 7px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--green) 0 10%, var(--line) 10%); }
-.road2 > li { position: relative; padding: 32px 22px 0 0; }
-.road2 > li::before { content: ''; position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--c); }
-.road2 > li.here::before { background: var(--c); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent); }
-.road2 .when { color: var(--c); font-size: 14px; font-weight: 600; margin: 0 0 2px; }
-.road2 h3 { margin-bottom: 10px; }
-.road2 ul { margin: 0; padding: 0; list-style: none; color: var(--soft); font-size: 15px; line-height: 1.5; }
-.road2 ul li { margin: 0 0 8px; padding-left: 14px; position: relative; }
-.road2 ul li::before { content: ''; position: absolute; left: 0; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: var(--c); opacity: .7; }
-.road2 .tag { display: inline-block; margin-top: 6px; font-size: 13px; color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); border-radius: 999px; padding: 1px 9px; }
+/* Roadmap: an arrangement. Stages are clips on one lane, the playhead marks where we are. */
+.arr { list-style: none; padding: 0; margin: 44px 0 0; display: grid; grid-template-columns: 1.4fr 1.75fr 2.2fr 1.75fr 1.9fr; position: relative; }
+.arr::before { content: ''; position: absolute; inset: 0 0 auto; height: 96px; border: 1px solid var(--line); border-radius: 12px; pointer-events: none;
+  background:
+    linear-gradient(var(--line), var(--line)) 0 30px / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, #ffffff0a 0 1px, transparent 1px 48px) 0 31px / 100% 64px no-repeat,
+    repeating-linear-gradient(90deg, #ffffff14 0 1px, transparent 1px 48px) 0 20px / 100% 10px no-repeat,
+    var(--panel); }
+.arr > li { position: relative; min-width: 0; }
+.arr .when { position: relative; height: 30px; margin: 0; padding: 0 0 0 12px; font-size: 13px; font-weight: 600; line-height: 30px; color: var(--c); white-space: nowrap; }
+.arr .when::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 2px; border-radius: 1px; background: var(--c); }
+.arr > li:first-child .when { padding-left: 14px; }
+.arr > li:first-child .when::before { left: 4px; }
+.arr .clip { --n: color-mix(in srgb, var(--c) 70%, #fff 10%); position: relative; height: 50px; margin: 8px 4px 0 2px; padding: 0 8px; border: 1px solid color-mix(in srgb, var(--c) 60%, transparent); border-radius: 7px; overflow: hidden;
+  font-size: 13px; font-weight: 650; line-height: 20px; letter-spacing: 0; white-space: nowrap; text-overflow: ellipsis; color: #fff;
+  background:
+    linear-gradient(color-mix(in srgb, var(--c) 58%, transparent), color-mix(in srgb, var(--c) 58%, transparent)) 0 0 / 100% 20px no-repeat,
+    repeating-linear-gradient(90deg, var(--n) 0 12px, transparent 12px 31px) 6px 26px / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, var(--n) 0 22px, transparent 22px 37px) 18px 32px / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, var(--n) 0 8px, transparent 8px 19px) 10px 39px / 100% 2px no-repeat,
+    color-mix(in srgb, var(--c) 16%, var(--panel-2)); }
+.arr > li:first-child .clip { margin-left: 6px; }
+.arr > li:nth-child(2) .clip { background-position: 0 0, 20px 32px, 2px 26px, 26px 39px, 0 0; }
+.arr > li:nth-child(3) .clip { background-position: 0 0, 14px 39px, 30px 26px, 3px 32px, 0 0; }
+.arr > li:nth-child(4) .clip { background-position: 0 0, 25px 26px, 8px 39px, 18px 32px, 0 0; }
+.arr > li:nth-child(5) .clip { background-position: 0 0, 3px 32px, 22px 26px, 12px 39px, 0 0; }
+.arr > li:last-child .clip { margin-right: 0; border-right: 0; border-radius: 7px 0 0 7px; -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent); mask-image: linear-gradient(90deg, #000 55%, transparent); }
+/* The playhead is one shape (head and stem in one polygon), so the head stays centred at any zoom. */
+.arr .ph { position: absolute; top: 18px; left: 78%; width: 12px; height: 78px; margin-left: -6px; z-index: 2; filter: drop-shadow(0 0 5px var(--c)); pointer-events: none; }
+.arr .ph::before { content: ''; position: absolute; inset: 0; background: var(--c); clip-path: polygon(0 0, 100% 0, 7px 8px, 7px 100%, 5px 100%, 5px 8px); }
+.arr ul { margin: 28px 0 0; padding: 0 18px 0 4px; list-style: none; color: var(--soft); font-size: 15px; line-height: 1.5; }
+.arr > li:first-child ul { padding-left: 6px; }
+.arr ul li { margin: 0 0 9px; padding-left: 13px; position: relative; }
+.arr ul li::before { content: ''; position: absolute; left: 0; top: .6em; width: 6px; height: 3px; border-radius: 1px; background: var(--c); }
+@media (max-width: 1120px) { .arr .clip { font-size: 12px; padding: 0 6px; } }
 .plans { display: grid; grid-template-columns: 1.15fr 1fr 1fr; margin-top: 64px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
 .plans > div { padding: 26px 26px 24px; }
 .plans > div + div { border-left: 1px solid var(--line); }
@@ -213,10 +236,15 @@ pre code { background: none; padding: 0; }
 .promise { margin: 18px 0 0; color: var(--dim); font-size: 15px; }
 .promise b { color: var(--text); font-weight: 600; }
 @media (max-width: 920px) {
-  .road2 { grid-template-columns: 1fr; padding-left: 30px; }
-  .road2::before { top: 0; bottom: 0; left: 7px; right: auto; width: 2px; height: auto; background: linear-gradient(180deg, var(--green) 0 7%, var(--line) 7%); }
-  .road2 > li { padding: 0 0 28px; }
-  .road2 > li::before { left: -30px; }
+  .arr { grid-template-columns: 1fr; margin-top: 32px; }
+  .arr::before { display: none; }
+  .arr > li { padding: 0 0 30px; }
+  .arr .when, .arr > li:first-child .when { padding-left: 12px; }
+  .arr > li:first-child .when::before { left: 0; }
+  .arr .clip, .arr > li:first-child .clip { margin: 4px 0 0; }
+  .arr ul, .arr > li:first-child ul { margin-top: 16px; padding: 0; }
+  .arr .ph { top: auto; bottom: 12px; left: 0; right: 0; width: auto; height: 2px; margin: 0; }
+  .arr .ph::before { clip-path: none; }
   .plans { grid-template-columns: 1fr; }
   .plans > div + div { border-left: 0; border-top: 1px solid var(--line); }
 }
@@ -733,39 +761,49 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
 
   <section class="wrap" id="roadmap">
     <h2>Where it is going</h2>
-    <p class="prose dim">The studio stays free and runs in your browser. What comes next is the part a static page cannot do: your projects in the cloud, a history of every agent turn, and an agent that works with no setup. Your feedback decides the order.</p>
-    <ol class="road2">
-      <li class="here" style="--c: var(--green)"><p class="when">Now</p><h3>Public preview</h3><ul>
+    <p class="prose dim">First an easy start and a smarter agent. Then a full studio. Right after it, several people can work in one project live: make music with friends or teach a class. Cloud and built-in models come after that. The studio stays free and runs in your browser. Your feedback decides the order.</p>
+    <ol class="arr">
+      <li class="here" style="--c: var(--green)"><p class="when">Now</p><span class="ph" aria-hidden="true"></span><h3 class="clip">Public preview</h3><ul>
         <li>The studio above, free</li>
-        <li>Your own agent through the bridge, with two producer skills</li>
+        <li>Your own agent through the bridge, with producer skills</li>
         <li>Export to WAV, MP3, stems and MIDI</li>
       </ul></li>
-      <li style="--c: var(--you)"><p class="when">Next</p><h3>Easier start</h3><ul>
-        <li>Paste your own API key and use the agent in the tab, without a terminal</li>
-        <li>A demo project and first-run hints</li>
-        <li>Chorus, count-in, recording in song mode</li>
-        <li>Tempo and key changes inside a song</li>
+      <li style="--c: var(--you)"><p class="when">Next</p><h3 class="clip">Easy start, smarter agent</h3><ul>
+        <li>A demo project, a demo video and first-run hints</li>
+        <li>A library of focused producer skills: stages, sounds and genres. The agent picks the right one</li>
+        <li>Skills come through the bridge, with nothing to clone</li>
       </ul></li>
-      <li style="--c: var(--violet)"><p class="when">Then</p><h3>Project history</h3><ul>
-        <li>A timeline of agent turns: what changed, in notes and decibels</li>
-        <li>Listen to two versions back to back</li>
-        <li>Restore any turn as a copy</li>
-      </ul><span class="tag">Free on this device</span></li>
-      <li style="--c: var(--teal)"><p class="when">Then</p><h3>Meloduo Cloud</h3><ul>
-        <li>Your projects and their history on every device</li>
-        <li>Share a project by link</li>
-        <li>Built-in models: pick one and start, pay for what you use</li>
-      </ul><span class="tag">Subscription and credits</span></li>
-      <li style="--c: var(--agent)"><p class="when">Later</p><h3>Together</h3><ul>
-        <li>Work in one project with a friend, live</li>
-        <li>Lessons for teachers: the agent tutors, the teacher reviews</li>
+      <li style="--c: var(--violet)"><p class="when">Then</p><h3 class="clip">A full studio</h3><ul>
+        <li>Faster renders and fewer steps for the agent</li>
+        <li>New effects: chorus, phaser, gate, tape and more; a deeper delay and reverb</li>
+        <li>Audio clips you can cut, fade and stretch to the tempo</li>
+        <li>Tempo, time signature and key changes inside a song</li>
+        <li>Count-in, recording in song mode, MIDI file import</li>
+        <li>Record from a microphone</li>
+        <li>Full automation, track freeze, export with dither and FLAC</li>
+      </ul></li>
+      <li style="--c: var(--agent)"><p class="when">Right after</p><h3 class="clip">Together</h3><ul>
+        <li>Several people edit one project live and see each other's changes</li>
+        <li>Invite to edit or to view only</li>
+        <li>Music lessons: students watch the teacher's project live</li>
+        <li>Everyone brings an agent and undoes their own edits</li>
+        <li>Chat with the agent in the tab: paste your own API key, no terminal</li>
+      </ul></li>
+      <li style="--c: var(--teal)"><p class="when">Later</p><h3 class="clip">Meloduo Cloud and more</h3><ul>
+        <li>A history of agent turns: listen to two versions, restore any turn</li>
+        <li>Your projects on every device, share by link</li>
+        <li>Built-in models on credits: no key, no setup</li>
+        <li>Classes for schools: the agent tutors, the teacher reviews</li>
+        <li>Sample and loop library, acoustic instruments</li>
         <li>VST plugins through a desktop app</li>
+        <li>Works offline, more languages</li>
       </ul></li>
     </ol>
 
     <div class="plans">
       <div class="free" style="--c: var(--green)"><p class="name">Free</p><p class="how">Always</p><ul>
         <li>The whole studio and every instrument</li>
+        <li>Every producer skill</li>
         <li>Projects saved in your browser</li>
         <li>Export of audio, stems and MIDI</li>
         <li>Your own agent through any MCP client</li>
@@ -773,7 +811,7 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
       <div style="--c: var(--teal)"><p class="name">Cloud</p><p class="how">Subscription, planned</p><ul>
         <li>Sync and backup across devices</li>
         <li>Full project history in the cloud</li>
-        <li>Share by link; live co-editing later</li>
+        <li>Share a project by link</li>
       </ul><p class="note">Price at launch.</p><a class="btn quiet small" data-link="idea" href="#">Ask for it</a></div>
       <div style="--c: var(--agent)"><p class="name">Built-in models</p><p class="how">Credits, planned</p><ul>
         <li>Choose a model in the app; you need no key and no setup</li>
