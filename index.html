@@ -223,20 +223,6 @@ pre code { background: none; padding: 0; }
 .arr ul li { margin: 0 0 9px; padding-left: 13px; position: relative; }
 .arr ul li::before { content: ''; position: absolute; left: 0; top: .6em; width: 6px; height: 3px; border-radius: 1px; background: var(--c); }
 @media (max-width: 1120px) { .arr .clip { font-size: 12px; padding: 0 6px; } }
-.plans { display: grid; grid-template-columns: 1.15fr 1fr 1fr; margin-top: 64px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
-.plans > div { padding: 26px 26px 24px; }
-.plans > div + div { border-left: 1px solid var(--line); }
-.plans .free { background: radial-gradient(120% 120% at 0% 0%, #1ed48a14, transparent 60%), var(--panel); }
-.plans .name { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 2px; }
-.plans .how { color: var(--c); font-size: 14px; font-weight: 600; margin: 0 0 14px; }
-.plans ul { margin: 0; padding-left: 18px; color: var(--soft); font-size: 15px; }
-.plans li { margin: 0 0 6px; }
-.plans .note { color: var(--dim); font-size: 14px; margin: 14px 0 0; }
-.plans > div { display: flex; flex-direction: column; align-items: flex-start; }
-.plans .btn { margin-top: auto; }
-.plans ul { margin-bottom: 18px; }
-.promise { margin: 18px 0 0; color: var(--dim); font-size: 15px; }
-.promise b { color: var(--text); font-weight: 600; }
 @media (max-width: 920px) {
   .arr { grid-template-columns: 1fr; margin-top: 32px; }
   .arr::before { display: none; }
@@ -247,8 +233,6 @@ pre code { background: none; padding: 0; }
   .arr ul, .arr > li:first-child ul { margin-top: 16px; padding: 0; }
   .arr .ph { top: auto; bottom: 12px; left: 0; right: 0; width: auto; height: 2px; margin: 0; }
   .arr .ph::before { clip-path: none; }
-  .plans { grid-template-columns: 1fr; }
-  .plans > div + div { border-left: 0; border-top: 1px solid var(--line); }
 }
 
 /* Feedback */
@@ -802,27 +786,6 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
         <li>Works offline, more languages</li>
       </ul></li>
     </ol>
-
-    <div class="plans">
-      <div class="free" style="--c: var(--green)"><p class="name">Free</p><p class="how">Always</p><ul>
-        <li>The whole studio and every instrument</li>
-        <li>Every producer skill</li>
-        <li>Projects saved in your browser</li>
-        <li>Export of audio, stems and MIDI</li>
-        <li>Your own agent through any MCP client</li>
-      </ul><a class="btn primary small" href="app/">Open the app</a></div>
-      <div style="--c: var(--teal)"><p class="name">Cloud</p><p class="how">Subscription, planned</p><ul>
-        <li>Sync and backup across devices</li>
-        <li>Full project history in the cloud</li>
-        <li>Share a project by link</li>
-      </ul><p class="note">Price at launch.</p><a class="btn quiet small" data-link="idea" href="#">Ask for it</a></div>
-      <div style="--c: var(--agent)"><p class="name">Built-in models</p><p class="how">Credits, planned</p><ul>
-        <li>Choose a model in the app; you need no key and no setup</li>
-        <li>Models from the major AI labs; we train none of our own</li>
-        <li>The price follows the model's own cost</li>
-      </ul><p class="note">A monthly cap, so there are no surprise bills.</p><a class="btn quiet small" data-link="idea" href="#">Ask for it</a></div>
-    </div>
-    <p class="promise"><b>Everything you can do today stays free.</b> Paid plans pay for the server they need.</p>
   </section>
 
   <section class="wrap" id="talk">
@@ -925,7 +888,6 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
 // Fill in before publishing; an empty link hides its line.
 const LINKS = {
   bug: 'https://github.com/meloduo/meloduo-agent/issues/new',
-  idea: 'https://github.com/meloduo/meloduo-agent/discussions',
   survey: '',
   skills: 'https://github.com/meloduo/meloduo-agent/tree/main/skills',
   updates: '',
