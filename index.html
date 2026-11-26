@@ -506,6 +506,7 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
+<script async src="/app/analytics.js"></script>
 </head>
 <body>
 <header class="top" id="top">
@@ -709,7 +710,7 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
       <div><h3>Goes to your AI provider</h3><ul><li>The project state the agent reads: notes, channels, settings</li><li>Render reports: numbers, not audio</li><li>Your messages to the agent</li></ul></div>
       <div><h3>What the agent cannot do through Meloduo</h3><ul><li>Open other projects in your library or import files</li><li>Add web plugins: it only turns the knobs of the ones you added</li><li>Make a change you cannot undo while the tab is open</li></ul></div>
     </div>
-    <p class="dim prose" style="margin-top:20px">GitHub hosts this site and, like any web host, sees your IP address. A web plugin you add yourself loads its code from the site you got it from.</p>
+    <p class="dim prose" style="margin-top:20px">GitHub hosts this site and, like any web host, sees your IP address. The site and the app load Google Tag Manager to count visits, with cookies turned off. A web plugin you add yourself loads its code from the site you got it from.</p>
     <p class="dim prose">The feedback form sends the topic, your message, this page's address, your email if you give one, and for a bug your browser and system unless you untick the box. Web3Forms relays it to our mailbox and, like any web service, sees your IP address. We keep it there to reply and plan, and delete it when you ask.</p>
   </section>
 
@@ -885,7 +886,7 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
       <li><b>Desktop Chrome or Edge.</b> Other browsers and phones are not tested yet.</li>
       <li><b>Your projects live in this browser.</b> Clearing site data deletes them. Save a project file as a backup.</li>
       <li><b>No built-in chat.</b> Bring your own agent and its subscription.</li>
-      <li><b>No accounts, no cookies, no tracking.</b> Meloduo has no server. Your projects leave your browser only through the bridge you run, and feedback only when you send it.</li>
+      <li><b>No accounts, no cookies.</b> Meloduo has no server. Google Tag Manager counts visits to the site and the app, with cookies turned off. Your projects leave your browser only through the bridge you run, and feedback only when you send it.</li>
       <li><b>No VST plugins yet.</b> Browsers cannot run them. Web plugins in the WAM 2.0 format work.</li>
     </ul>
     <div style="margin-top:44px">
@@ -912,7 +913,7 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
 <footer>
   <div class="wrap">
     <div>
-      <p>Meloduo, public preview. Updated 23 November 2026.</p>
+      <p>Meloduo, public preview. Updated 26 November 2026.</p>
       <p class="credits">Built with React (MIT), Web Audio Modules (MIT), lamejs for MP3 export (LGPL-3.0) and the Geist font (SIL OFL 1.1): <a href="licenses.txt">licenses</a>. Claude Code, Cursor, VS Code and Codex are trademarks of their owners; Meloduo is not affiliated with them.</p>
       <p class="credits">© 2026 Ilya Shumchenko</p>
     </div>
