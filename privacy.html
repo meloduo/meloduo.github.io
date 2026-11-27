@@ -29,7 +29,7 @@ li { margin-bottom: 6px; }
 <main>
   <a class="home" href="/"><svg viewBox="0 0 96 96" aria-hidden="true"><path d="M42 12A4 4 0 0 1 46 8H48A4 4 0 0 1 52 12V74H42Z" fill="#3d9bff"/><ellipse cx="32" cy="76" rx="15" ry="11" transform="rotate(-20 32 76)" fill="#3d9bff"/></svg>Meloduo</a>
   <h1>Privacy</h1>
-  <p class="dim">Updated 26 November 2026. Meloduo is an alpha.</p>
+  <p class="dim">Updated 27 November 2026. Meloduo is a personal project by Ilya Shumchenko, still in progress.</p>
 
   <p>Short version: your projects stay in your browser. Meloduo has no accounts, no server of its own and no cookies. The site and the app count visits with Google Tag Manager. A project leaves your computer only when you send it somewhere: to your AI agent, to a file, to a friend, or in a problem report if you tick Attach project.</p>
 
@@ -38,25 +38,25 @@ li { margin-bottom: 6px; }
     <li>Projects, imported sounds and sound folders: in the browser's IndexedDB storage for this site.</li>
     <li>Settings such as the layout, volume and export options: in the browser's localStorage.</li>
   </ul>
-  <p>We cannot see or restore this data. Clearing the site data in your browser deletes it. To keep a project safe, use File › Save project file.</p>
+  <p>I cannot see or restore this data. Clearing the site data in your browser deletes it. To keep a project safe, use File › Save project file.</p>
 
   <h2>What goes to your AI agent</h2>
-  <p>Meloduo has no built-in AI. When you connect an agent, the bridge (<code>@meloduo/mcp</code>) runs on your computer and passes the project between the tab and your agent client, such as Claude Code. Your client then sends what the agent reads (notes, settings, render measurements) to its AI provider. That provider's privacy policy applies, not ours. If you never connect an agent, nothing goes to any AI provider.</p>
+  <p>Meloduo has no built-in AI. When you connect an agent, the bridge (<code>@meloduo/mcp</code>) runs on your computer and passes the project between the tab and your agent client, such as Claude Code. Your client then sends what the agent reads (notes, settings, render measurements) to its AI provider. That provider's privacy policy applies, not this one. If you never connect an agent, nothing goes to any AI provider.</p>
 
   <h2>Web plugins</h2>
   <p>When you add a web plugin by URL, your browser downloads it from that address and runs it on this page. The plugin's author can see the request and controls what the plugin does. Add plugins only from people you trust.</p>
 
   <h2>The feedback form</h2>
-  <p>The form on the home page sends your message through <a href="https://web3forms.com/privacy">Web3Forms</a> to our mailbox. It sends your text, the page address, your email if you give one, and your browser version only if you tick that box on a bug report. We use it only to read and answer you.</p>
+  <p>The form on the home page sends your message through <a href="https://web3forms.com/privacy">Web3Forms</a> to my mailbox. It sends the topic, your text, the page address, your email if you give one, and with a bug report your browser and system unless you untick the box. I use your message to reply and to plan, and your email only to reply. I delete both when you ask.</p>
 
   <h2>Error log and problem reports</h2>
-  <p>The app keeps a short error log in your browser (<code>localStorage</code>, the last 20 errors). Nothing in it leaves your computer by itself. A report goes out only when you click Send in the Report a problem window, and you see the exact text first. It contains the time, your browser version, the error message and a short stack trace, the names of your last 10 actions (stored like <code>user:addNotes</code>, never their content), and what you type in the optional field. Your project file goes along only if you tick the box, which is off by default. The report goes to our mailbox through <a href="https://web3forms.com/privacy">Web3Forms</a>, the same service as the feedback form, which sees your IP address. You can clear the log by clearing the site data in your browser.</p>
+  <p>The app keeps a short error log in your browser (<code>localStorage</code>, the last 20 errors). Nothing in it leaves your computer by itself. A report goes out only when you click Send in the Report a problem window, and you see the exact text first. It contains the time, your browser version, the error message and a short stack trace, the names of your last 10 actions (stored like <code>user:addNotes</code>, never their content), and what you type in the optional field. Your project file goes along only if you tick the box, which is off by default. The report goes to my mailbox through <a href="https://web3forms.com/privacy">Web3Forms</a>, the same service as the feedback form, which sees your IP address. You can clear the log by clearing the site data in your browser.</p>
 
   <h2>Visit statistics</h2>
-  <p>The site and the app load Google Tag Manager, which runs Google Analytics. Google receives the page address, the referring page, your browser and screen details, the time and your IP address. We use this to see how many people come and from where. Consent Mode denies all storage, so these tags set no cookies. We do not send your projects, sounds or messages. Google handles the data as its <a href="https://policies.google.com/privacy">privacy policy</a> describes. A content blocker stops these requests, and Meloduo works the same without them.</p>
+  <p>The site and the app load Google Tag Manager, which runs Google Analytics. Google receives the page address, the referring page, your browser and screen details, the time and your IP address. I use this to see how many people come and from where. Consent Mode denies all storage, so these tags set no cookies. I do not send your projects, sounds or messages. Google handles the data as its <a href="https://policies.google.com/privacy">privacy policy</a> describes. A content blocker stops these requests, and Meloduo works the same without them.</p>
 
   <h2>Hosting</h2>
-  <p>The site and the app are served by GitHub Pages. GitHub may log your IP address for security, as its <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a> describes. We do not get these logs.</p>
+  <p>The site and the app are served by GitHub Pages. GitHub may log your IP address for security, as its <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a> describes. I do not get these logs.</p>
 
   <h2>Contact</h2>
   <p>Questions or a request to delete a message you sent: <a href="mailto:meloduo.demo@gmail.com">meloduo.demo@gmail.com</a>.</p>

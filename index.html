@@ -46,8 +46,9 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 nav.links { display: flex; align-items: center; gap: 24px; font-size: 15px; }
 nav.links a { color: var(--dim); text-decoration: none; }
 nav.links a:hover { color: var(--text); }
-nav.links a.pill { color: var(--text); border: 1px solid var(--line); padding: 7px 14px; border-radius: 99px; }
-nav.links a.pill:hover { border-color: var(--you); }
+nav.links .pill { color: var(--text); border: 1px solid var(--line); padding: 7px 14px; border-radius: 99px; }
+nav.links .pill:hover { border-color: var(--you); }
+nav.links button.pill { background: transparent; font: inherit; cursor: pointer; }
 
 /* The flag of the logo: the agent finishes your note. Plays once on load. */
 .flag { transform-origin: 52px 36px; animation: flag 0.9s cubic-bezier(.3,1.4,.5,1) 0.5s both; }
@@ -348,6 +349,7 @@ footer .credits { font-size: 13px; }
   .privacy { grid-template-columns: 1fr; }
   .compare { font-size: 13px; } .compare th, .compare td { padding: 10px 8px; }
 }
+@media (max-width: 359px) { .compare tbody th { width: 136px; } .compare .us { width: 120px; } .compare th, .compare td { padding-inline: 6px; } }
 /* Five stages of one track */
 .roll-hint { display: flex; justify-content: space-between; gap: 16px; }
 .roll-hint .keys { flex-shrink: 0; }
@@ -485,6 +487,17 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
   .fb-head { --x0: 18px; }
   section { padding-top: 80px; }
 }
+/* Touch-first devices cannot run the app: they get "send the link" instead of "open". */
+button.share, .touch-note, .touch-only { display: none; }
+.share-msg { position: fixed; z-index: 20; left: 50%; bottom: 16px; transform: translateX(-50%); width: max-content; max-width: calc(100% - 32px); margin: 0; overflow-wrap: anywhere; font-size: 15px; }
+.share-url { user-select: all; }
+.share-msg:not(:empty) { padding: 10px 16px; background: var(--panel-2); border: 1px solid var(--you); border-radius: 10px; }
+@media (hover: none) and (pointer: coarse) {
+  .open-app { display: none; }
+  .touch-only { display: inline; }
+  button.share { display: inline-flex; }
+  .touch-note { display: block; margin: 16px 0 0; font-size: 14px; color: var(--dim); }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -505,7 +518,8 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
       <a class="hide-sm" href="#privacy">Privacy</a>
       <a class="hide-sm" href="#roadmap">Roadmap</a>
       <a class="hide-sm" href="#talk">Feedback</a>
-      <a class="pill" href="app/">Open the app</a>
+      <a class="pill open-app" href="app/">Open the app</a>
+      <button class="pill share" type="button">Send link</button>
     </nav>
   </div>
 </header>
@@ -515,10 +529,12 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
     <h1>A free browser studio your AI agent edits live.</h1>
     <p class="lede">Meloduo is a free music studio in your browser: no account, no DAW to buy. Connect the AI agent you already use: it writes notes, shapes sounds and mixes in the project open in your tab. You see every edit and the reason for it. One click undoes its whole turn.</p>
     <div class="actions">
-      <a class="btn primary" href="app/">Open the app</a>
+      <a class="btn primary open-app" href="app/">Open the app</a>
+      <button class="btn primary share" type="button">Send the link to your computer</button>
       <a class="btn quiet" href="#setup">Connect an agent</a>
       <span class="note-free">Free. No account.</span>
     </div>
+    <p class="touch-note">Meloduo works on a computer, in Chrome or Edge. Phones and tablets are not supported yet.</p>
 
     <figure class="roll studio" id="roll" aria-label="One track, five stages of the agent's work. Press Play to hear it.">
       <div class="stages">
@@ -606,15 +622,15 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
     <h2>A generator gives you a file. Meloduo gives you a project.</h2>
     <p class="prose dim">Song generators are fast, but the result is hard to change: to fix the bass you often regenerate the song. A DAW gives you full control, and weeks of learning before the first track. AI features inside big DAWs help with parts. Meloduo lets the agent you already use work on the whole project, next to you.</p>
     <div class="compare-scroll"><table class="compare">
-      <thead><tr><th scope="col"></th><th scope="col">A song generator</th><th scope="col">A DAW on your own</th><th scope="col">AI features in a DAW</th><th scope="col" class="us">Meloduo</th></tr></thead>
+      <thead><tr><th scope="col"></th><th scope="col" class="us">Meloduo</th><th scope="col">A song generator</th><th scope="col">A DAW on your own</th><th scope="col">AI features in a DAW</th></tr></thead>
       <tbody>
-        <tr><th scope="row">A first draft in minutes</th><td class="yes">Yes</td><td>No</td><td>For parts</td><td class="us yes">Yes</td></tr>
-        <tr><th scope="row">Notes, sounds and mix you can edit</th><td>Stems at best</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="us yes">Yes</td></tr>
-        <tr><th scope="row">Every change explained</th><td>No</td><td>—</td><td>Sometimes</td><td class="us yes">Yes</td></tr>
-        <tr><th scope="row">Undo what you don't like</th><td>Regenerate</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="us yes">One turn at a time</td></tr>
-        <tr><th scope="row">Works with the AI you already use</th><td>No</td><td>—</td><td>Built-in only</td><td class="us yes">Any MCP client</td></tr>
-        <tr><th scope="row">Pro instruments and third-party plugins</th><td>—</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="us">Built-in and web plugins; VST later</td></tr>
-        <tr><th scope="row">You stay in control</th><td>Partly</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="us yes">Yes</td></tr>
+        <tr><th scope="row">A first draft in minutes</th><td class="us yes">Yes</td><td class="yes">Yes</td><td>No</td><td>For parts</td></tr>
+        <tr><th scope="row">Notes, sounds and mix you can edit</th><td class="us yes">Yes</td><td>Stems at best</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><th scope="row">Every change explained</th><td class="us yes">Yes</td><td>No</td><td>—</td><td>Sometimes</td></tr>
+        <tr><th scope="row">Undo what you don't like</th><td class="us yes">One turn at a time</td><td>Regenerate</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><th scope="row">Works with the AI you already use</th><td class="us yes">Any MCP client</td><td>No</td><td>—</td><td>Built-in only</td></tr>
+        <tr><th scope="row">Pro instruments and third-party plugins</th><td class="us">Built-in and web plugins; VST later</td><td>—</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><th scope="row">You stay in control</th><td class="us yes">Yes</td><td>Partly</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
       </tbody>
     </table></div>
   </section>
@@ -695,14 +711,14 @@ kbd { font: 600 11px/1 'Geist', system-ui, sans-serif; color: var(--soft); backg
       <div><h3>What the agent cannot do through Meloduo</h3><ul><li>Open other projects in your library or import files</li><li>Add web plugins: it only turns the knobs of the ones you added</li><li>Make a change you cannot undo while the tab is open</li></ul></div>
     </div>
     <p class="dim prose" style="margin-top:20px">GitHub hosts this site and, like any web host, sees your IP address. The site and the app load Google Tag Manager to count visits, with cookies turned off. A web plugin you add yourself loads its code from the site you got it from.</p>
-    <p class="dim prose">The feedback form sends the topic, your message, this page's address, your email if you give one, and for a bug your browser and system unless you untick the box. Web3Forms relays it to our mailbox and, like any web service, sees your IP address. We keep it there to reply and plan, and delete it when you ask.</p>
+    <p class="dim prose">The feedback form sends the topic, your message, this page's address, your email if you give one, and for a bug your browser and system unless you untick the box. Web3Forms relays it to my mailbox and, like any web service, sees your IP address. I use your message to reply and to plan, and your email only to reply. I delete both when you ask.</p>
   </section>
 
   <section class="wrap" id="setup">
     <div class="setup">
       <div>
         <h2>Connect your agent</h2>
-        <p class="dim">Want to try the studio first? <a href="app/">Open the app</a>: it works without an agent.</p>
+        <p class="dim open-app">Want to try the studio first? <a href="app/">Open the app</a>: it works without an agent.</p>
         <p class="dim">For the agent you need Node.js 20 or newer and any MCP client. The bridge runs on your computer and talks only to the Meloduo tab. <a href="#privacy">What leaves your computer</a>.</p>
       </div>
       <ol class="how">
@@ -731,7 +747,7 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
           <div class="code" data-client="other" hidden><div class="code-bar"><span>Any client: a stdio server</span><button class="copy" type="button">Copy</button></div><pre><code>{ "command": "npx", "args": ["-y", "@meloduo/mcp"] }</code></pre></div>
         </li>
         <li><h3>Add the skills</h3><p class="dim">Four skills and more than 100 short producer guides: a track from an idea to a master in ten stages, sound design by trying variants, mixing and mastering. Copy the four <code>skills</code> folders into your client's skills folder; the skills load the guides through the bridge (<code>get_guide</code>), so no other files are needed. A client without skills can read <code>SKILL.md</code> as instructions.</p><p><a class="btn quiet small" data-link="skills" href="#">Get the skills on GitHub</a></p></li>
-        <li><h3>Open the app and ask</h3><p class="dim"><a href="app/">Open Meloduo</a>, click once so the browser allows sound, and allow access to local devices if the browser asks. Then ask your agent for a track.</p></li>
+        <li><h3>Open the app and ask</h3><p class="dim"><a class="open-app" href="app/">Open Meloduo</a><span class="touch-only">Open Meloduo on your computer</span>, click once so the browser allows sound, and allow access to local devices if the browser asks. Then ask your agent for a track.</p></li>
       </ol>
     </div>
   </section>
@@ -748,9 +764,9 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
 
   <section class="wrap" id="roadmap">
     <h2>Where it is going</h2>
-    <p class="prose dim">First an easy start and a smarter agent. Then a full studio. Right after it, several people can work in one project live: make music with friends or teach a class. Cloud and built-in models come after that. The studio stays free and runs in your browser. Your feedback decides the order.</p>
+    <p class="prose dim">First an easy start and a smarter agent. Then a full studio. Right after it, several people can work in one project live: make music with friends or teach a class. Cloud sync and built-in models come after that. The studio runs in your browser. Your feedback decides the order.</p>
     <ol class="arr">
-      <li class="here" style="--c: var(--green)"><p class="when">Now</p><span class="ph" aria-hidden="true"></span><h3 class="clip">Public preview</h3><ul>
+      <li class="here" style="--c: var(--green)"><p class="when">Now</p><span class="ph" aria-hidden="true"></span><h3 class="clip">Working today</h3><ul>
         <li>The studio above, free</li>
         <li>Your own agent through the bridge, with producer skills</li>
         <li>Export to WAV, MP3, stems and MIDI</li>
@@ -776,10 +792,10 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
         <li>Everyone brings an agent and undoes their own edits</li>
         <li>Chat with the agent in the tab: paste your own API key, no terminal</li>
       </ul></li>
-      <li style="--c: var(--teal)"><p class="when">Later</p><h3 class="clip">Meloduo Cloud and more</h3><ul>
+      <li style="--c: var(--teal)"><p class="when">Later</p><h3 class="clip">Cloud sync and more</h3><ul>
         <li>A history of agent turns: listen to two versions, restore any turn</li>
         <li>Your projects on every device, share by link</li>
-        <li>Built-in models on credits: no key, no setup</li>
+        <li>Built-in models: no key, no setup</li>
         <li>Classes for schools: the agent tutors, the teacher reviews</li>
         <li>Sample and loop library, acoustic instruments</li>
         <li>VST plugins through a desktop app</li>
@@ -791,8 +807,8 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
   <section class="wrap" id="talk">
     <div class="talk">
       <div>
-        <h2>Tell us what to build</h2>
-        <p class="dim">This is a preview built in the open. We read every message, and they change the order of the roadmap.</p>
+        <h2>Tell me what to build</h2>
+        <p class="dim">Meloduo is my personal project. I read every message, and they change the order of the roadmap.</p>
         <p class="dim">No account needed. Leave your email if you want a reply.</p>
         <p class="dim small">Have two minutes? <a data-link="survey" href="#">Take the survey</a>.</p>
         <p class="dim small">Want news about new instruments and releases? <a data-link="updates" href="#">Get updates</a>.</p>
@@ -819,7 +835,7 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
             <button class="fb-send" type="submit"><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M2 1.2v9.6L10.5 6z"/></svg>Send</button>
             <div class="fb-fine">
               <label id="fb-ua-row"><input type="checkbox" id="fb-ua" checked>Add my browser and system</label>
-              <span>We use your email only to reply.</span>
+              <span>I use your email only to reply.</span>
             </div>
           </div>
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
@@ -845,20 +861,20 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
   <section class="wrap" id="limits">
     <h2>Know before you start</h2>
     <ul class="limits">
-      <li><b>Public preview.</b> Expect rough edges, and tell us what breaks.</li>
-      <li><b>Desktop Chrome or Edge.</b> Other browsers and phones are not tested yet.</li>
+      <li><b>A personal project.</b> Still in progress: expect rough edges, and tell me what breaks.</li>
+      <li><b>Desktop Chrome or Edge.</b> Other browsers are not tested yet. Phones and tablets are not supported yet.</li>
       <li><b>Your projects live in this browser.</b> Clearing site data deletes them. Save a project file as a backup.</li>
       <li><b>No built-in chat.</b> Bring your own agent and its subscription.</li>
       <li><b>No accounts, no cookies.</b> Meloduo has no server. Google Tag Manager counts visits to the site and the app, with cookies turned off. Your projects leave your browser only through the bridge you run, and feedback only when you send it.</li>
       <li><b>No VST plugins yet.</b> Browsers cannot run them. Web plugins in the WAM 2.0 format work.</li>
     </ul>
     <div style="margin-top:44px">
-      <details><summary>Is it free?</summary><p>Yes, and the studio stays free. You pay only for your own AI agent, if it is a paid one. Paid plans are planned for things that need a server: cloud sync and built-in models.</p></details>
+      <details><summary>Is it free?</summary><p>Yes. You pay only for your own AI agent, if it is a paid one.</p></details>
       <details><summary>Does the agent make the whole song for me?</summary><p>It can take a track from an idea to a master, but it works step by step in your project. You can stop it, edit its work, or undo its latest turn.</p></details>
-      <details><summary>Which agents work?</summary><p>Any client that speaks MCP. We test with Claude Code and Cline. The skills are plain SKILL.md folders, so other clients that read skills can use them too.</p></details>
+      <details><summary>Which agents work?</summary><p>Any client that speaks MCP. I test with Claude Code and Cline. The skills are plain SKILL.md folders, so other clients that read skills can use them too.</p></details>
       <details><summary>How is this different from MCP bridges for desktop DAWs?</summary><p>There is no DAW to buy or install: the studio runs in your browser. The agent edits the project open in your tab, so you see each change as it lands, with its reason, and one click undoes its whole turn. It cannot hear, so it renders the track and reads loudness, peaks and the spectrum before it decides.</p></details>
       <details><summary>Where are my projects?</summary><p>In your browser's storage on this computer. There is no cloud copy, so save project files for anything you care about.</p></details>
-      <details><summary>Which browsers work?</summary><p>Desktop Chrome and Edge are tested. Firefox and Safari may work but are not tested yet. Phones are not supported.</p></details>
+      <details><summary>Which browsers work?</summary><p>Desktop Chrome and Edge are tested. Firefox and Safari may work but are not tested yet. Phones and tablets are not supported yet.</p></details>
       <details><summary>Does Meloduo send my music anywhere?</summary><p>No. Meloduo has no server. Only your own agent sees the project state and render numbers, and sends them to the AI provider you chose. Audio never leaves your computer.</p></details>
       <details><summary>Will VST plugins work?</summary><p>Not in the browser. VST support is planned through a desktop app. Until then, web plugins in the WAM 2.0 format load in the mixer.</p></details>
     </div>
@@ -867,22 +883,26 @@ args = ["-y", "@meloduo/mcp"]</code></pre></div>
   <section class="wrap closing">
     <h2>Open the studio and ask your agent for a track</h2>
     <div class="actions">
-      <a class="btn primary" href="app/">Open the app</a>
+      <a class="btn primary open-app" href="app/">Open the app</a>
+      <button class="btn primary share" type="button">Send the link to your computer</button>
       <a class="btn quiet" href="#setup">Connect an agent</a>
     </div>
+    <p class="touch-note">Meloduo works on a computer, in Chrome or Edge. Phones and tablets are not supported yet.</p>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
     <div>
-      <p>Meloduo, public preview. Updated 26 November 2026.</p>
+      <p>Meloduo is a personal project, still in progress. Updated 27 November 2026.</p>
       <p class="credits">Built with React (MIT), Web Audio Modules (MIT), lamejs for MP3 export (LGPL-3.0) and the Geist font (SIL OFL 1.1): <a href="licenses.txt">licenses</a>. Claude Code, Cursor, VS Code and Codex are trademarks of their owners; Meloduo is not affiliated with them.</p>
       <p class="credits">© 2026 Ilya Shumchenko</p>
     </div>
     <div class="foot-links"><a href="https://github.com/meloduo/meloduo-agent">Bridge and skills on GitHub</a><a href="privacy.html">Privacy</a><a data-link="contact" href="#">Contact</a></div>
   </div>
 </footer>
+
+<p class="share-msg" id="share-msg" role="status"></p>
 
 <script>
 // Fill in before publishing; an empty link hides its line.
@@ -970,7 +990,7 @@ const LINKS = {
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
       const json = await res.json().catch(() => ({}));
       ok = res.ok && json.success === true;
-      note = ok ? (email.value ? `We will reply to ${email.value.trim()}.` : 'You left no email, so we cannot reply, but we will read it.')
+      note = ok ? (email.value ? `I will reply to ${email.value.trim()}.` : 'You left no email, so I cannot reply, but I will read it.')
         : res.status === 429 ? 'Too many messages at once. Try again in a minute, or email it.'
         : 'The form service did not accept it. Your text is kept: try again, or email it.';
     } catch { note = 'No connection to the form service. Your text is kept: try again, or email it.'; }
@@ -985,6 +1005,7 @@ const LINKS = {
   addEventListener('scroll', () => top.classList.toggle('scrolled', scrollY > 8), { passive: true });
 
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const touch = matchMedia('(hover: none) and (pointer: coarse)'); // same query as in the CSS
   const ns = 'http://www.w3.org/2000/svg';
   const el = (tag, attrs) => { const e = document.createElementNS(ns, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
 
@@ -1504,7 +1525,7 @@ const LINKS = {
     const ready = sc.state === 'done' || sc.state === 'undone';
     undo.disabled = !ready; undo.textContent = sc.state === 'undone' ? 'Redo turn' : 'Undo turn';
     const i = STAGES.indexOf(current);
-    next.disabled = !ready; next.textContent = i < 4 ? `Next step: ${tabs[i + 1].textContent.slice(1)}` : 'Open the app';
+    next.disabled = !ready; next.textContent = i < 4 ? `Next step: ${tabs[i + 1].textContent.slice(1)}` : touch.matches ? 'Send link' : 'Open the app';
     state.textContent = { idle: '', working: 'working', done: 'done', undone: 'undone' }[sc.state];
     tabs.forEach((t) => { const s = scenes[t.dataset.scene].state; t.classList.toggle('done', s === 'done'); t.classList.toggle('busy', s === 'working'); });
   };
@@ -1531,7 +1552,8 @@ const LINKS = {
     renderFeed(); runTurn(id);
   };
   tabs.forEach((t) => t.addEventListener('click', () => show(t.dataset.scene)));
-  next.addEventListener('click', () => { const i = STAGES.indexOf(current); if (i < 4) show(STAGES[i + 1]); else location.href = 'app/'; });
+  next.addEventListener('click', () => { const i = STAGES.indexOf(current); if (i < 4) show(STAGES[i + 1]); else if (touch.matches) shareLink(); else location.href = 'app/'; });
+  touch.addEventListener('change', () => renderFeed());
   undo.addEventListener('click', () => {
     const sc = scenes[current];
     if (sc.state === 'done') { [...sc.items].reverse().forEach((it) => it.off()); sc.state = 'undone'; }
@@ -1555,6 +1577,8 @@ const LINKS = {
 
   // One drawing loop for the visible stage.
   const buf = new Float32Array(512);
+  let eqDrawn, peaksFalling; // idle: the EQ redraws on change, the meters run until their peaks reach 0
+  eqCanvas.addEventListener('contextrestored', () => (eqDrawn = undefined));
   const frame = () => {
     if (playing) {
       const k = (ctx.currentTime - t0) / SD, songPos = k % songLen(), p = songPos % STEPS, s = Math.floor(p);
@@ -1566,13 +1590,18 @@ const LINKS = {
       pos.textContent = `${Math.floor(songPos / 16) + 1}:${Math.floor((songPos % 16) / 4) + 1}`;
     }
     if (current === 'mix') {
-      drawEq();
-      for (const id in strips) {
-        let v = 0;
-        if (playing && rig.an[id]) { const a = rig.an[id], b = buf.subarray(0, Math.min(512, a.fftSize)); a.getFloatTimeDomainData(b); let sq = 0; for (const x of b) sq += x * x; v = Math.sqrt(sq / b.length); }
-        const h = Math.max(0, Math.min(100, ((20 * Math.log10(v + 1e-6) + 48) / 48) * 100)), st = strips[id];
-        st.peak = Math.max(h, (st.peak || 0) - 0.6);
-        st.querySelector('.vu i').style.height = `${h}%`; st.querySelector('.vu b').style.bottom = `${st.peak}%`; st.querySelector('.vu b').style.opacity = st.peak > 1 ? 1 : 0;
+      const eqKey = playing ? '' : `${S.hp} ${S.dip}`;
+      if (playing || eqKey !== eqDrawn) { drawEq(); eqDrawn = eqKey; }
+      if (playing || peaksFalling) {
+        peaksFalling = false;
+        for (const id in strips) {
+          let v = 0;
+          if (playing && rig.an[id]) { const a = rig.an[id], b = buf.subarray(0, Math.min(512, a.fftSize)); a.getFloatTimeDomainData(b); let sq = 0; for (const x of b) sq += x * x; v = Math.sqrt(sq / b.length); }
+          const h = Math.max(0, Math.min(100, ((20 * Math.log10(v + 1e-6) + 48) / 48) * 100)), st = strips[id];
+          st.peak = Math.max(h, (st.peak || 0) - 0.6);
+          peaksFalling ||= st.peak > 0;
+          st.querySelector('.vu i').style.height = `${h}%`; st.querySelector('.vu b').style.bottom = `${st.peak}%`; st.querySelector('.vu b').style.opacity = st.peak > 1 ? 1 : 0;
+        }
       }
     }
     requestAnimationFrame(frame);
@@ -1603,6 +1632,21 @@ const LINKS = {
       setTimeout(() => (b.textContent = 'Copy'), 1600);
     });
   });
+  // Share buttons: system share sheet, else clipboard, else the address as text.
+  const shareMsg = document.getElementById('share-msg');
+  let shareTimer;
+  const say = (...parts) => { clearTimeout(shareTimer); shareMsg.replaceChildren(...parts); };
+  const shareLink = async () => {
+    const url = new URL('./', location.href).href;
+    say();
+    if (navigator.share) try { return await navigator.share({ title: 'Meloduo', text: 'Open this on your computer', url }); } catch (e) { if (e.name === 'AbortError') return; }
+    try { await navigator.clipboard.writeText(url); say('Link copied'); shareTimer = setTimeout(say, 2000); }
+    catch { const link = document.createElement('span'); link.className = 'share-url'; link.textContent = url; say('Copy this link: ', link); }
+  };
+  document.querySelectorAll('button.share').forEach((b) => b.addEventListener('click', shareLink));
+  addEventListener('pointerdown', (e) => { if (!shareMsg.contains(e.target)) say(); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') say(); });
+
   const clientTabs = [...document.querySelectorAll('.clients button')];
   clientTabs.forEach((tab) => tab.addEventListener('click', () => {
     clientTabs.forEach((x) => x.setAttribute('aria-selected', String(x === tab)));
